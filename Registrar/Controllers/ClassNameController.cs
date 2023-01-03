@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 // using ProjectName.Models;
 
-namespace ProjectName.Controllers
+namespace Registrar.Controllers
 {
-  public class ItemsController : Controllers
+  public class ItemsController : Controller
   {
     // Routes
 
