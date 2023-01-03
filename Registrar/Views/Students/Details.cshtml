@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+<h1>University Registrar</h1>
+<h2>Student Directory</h2>
+@model Registrar.Models.Student
+@using Registrar.Models
+@using System;
+
+<p>Student Name: @Html.DisplayFor(model => model.Name)</p>
+<p>Student Enrollment Date: @Model.EnrollmentDate.ToString("MM-dd-yyyy")</p>
+
+<p>@Html.ActionLink("Edit Student", "Edit", new { id = @Model.StudentId})</p>
+<p>@Html.ActionLink("Add New Student", "Create")</p>

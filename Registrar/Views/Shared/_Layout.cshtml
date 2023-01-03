@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>ProjectName</title>
+    <title>Registrar</title>
     <link 
       rel="stylesheet" 
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="~/css/styles.css">
   </head>
   <body>
-    @RenderBody()
-    @* @await Html.PartialAsync("Footer") *@
+    <div class="container d-flex flex-column jumbotron bg-white shadow">
+      @await Html.PartialAsync("NavBar")
+      @RenderBody()
+    </div>
   </body>
 </html>

@@ -6,6 +6,7 @@ namespace Registrar.Models
   {
     // properties, constructors, methods, etc. go here
     public string Name {get;set;}
+    public string CourseNumber {get;set;}
     public int CourseId {get;set;}
     public List<CourseStudent> JoinCourseStudents {get;}
   }

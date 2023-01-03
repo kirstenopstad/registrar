@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+<h1>University Registrar</h1>
+<h2>Edit Course</h2>
+
+@model Registrar.Models.Course
+
+<p>Editing Course: @Model.Name</p>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CourseId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  
+  @Html.LabelFor(model => model.CourseNumber)
+  @Html.TextBoxFor(model => model.CourseNumber)
+
+  <input type="submit" value="Update" />
+
+}
+@using (Html.BeginForm("Delete", "Courses"))
+{
+  @Html.Hidden("id", @Model.CourseId)
+  <input type="submit" value="Delete" />
+}
+
+<p>@Html.ActionLink("Add Course", "Create")</p>
