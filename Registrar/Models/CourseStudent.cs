@@ -3,11 +3,11 @@ namespace Registrar.Models
   public class CourseStudent
   {
     // properties, constructors, methods, etc. go here
-    public int CourseStudentId {get;set;}
-    public int CourseId {get;set;}
-    public Course Course {get;set;}
-    public int StudentId {get;set;}
-    public Student Student {get;set;}
+    public int CourseStudentId { get; set; }
+    public int CourseId { get; set; }
+    public Course Course { get; set; }
+    public int StudentId { get; set; }
+    public Student Student { get; set; }
   }
 }
 // class student : name, date of enroll 1
