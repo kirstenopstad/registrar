@@ -5,7 +5,8 @@
 <h2>Add Course</h2>
 
 @model Registrar.Models.Course
-
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger"})</p>
+<p>@Html.ValidationMessageFor(model => model.CourseNumber, "", new { @class = "text-danger"})</p>
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)

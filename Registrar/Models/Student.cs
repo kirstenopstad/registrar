@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Registrar.Models
 {
   public class Student
   {
     // properties, constructors, methods, etc. go here
-    public string Name {get;set;}
-    public DateTime EnrollmentDate {get;set;}
-    public int StudentId {get;set;}
-    public List<CourseStudent> JoinCourseStudents {get;}
+    [Required(ErrorMessage = "Name must be entered!")]
+    public string Name { get; set; }
+    [Range(typeof(DateTime), "1/1/2023", "12/31/2023",
+        ErrorMessage = "Registration is only open for calendar year 2023")]
+    public DateTime EnrollmentDate { get; set; }
+    public int StudentId { get; set; }
+    public List<CourseStudent> JoinCourseStudents { get; } // collection navigation property
   }
 }
 

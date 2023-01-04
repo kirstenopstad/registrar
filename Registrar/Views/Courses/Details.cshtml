@@ -9,5 +9,25 @@
 <p>Course Name: @Html.DisplayFor(model => model.Name)</p>
 <p>Course Number: @Html.DisplayFor(model => model.CourseNumber)</p>
 
+@if (@Model.JoinCourseStudents.Count == 0)
+{
+  <p>This course has no students enrolled.</p>
+}
+else
+{
+  <h4>Students Enrolled</h4>
+  <ul>
+    @foreach (CourseStudent courseStudent in Model.JoinCourseStudents)
+    {
+      <li>Student Name: @courseStudent.Student.Name</li>
+      @using (Html.BeginForm("DeleteCourse", "Courses", routeValues: new { id = courseStudent.CourseStudentId }))
+      {
+        <input type="submit" value="Remove Student">
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Enroll Student", "AddStudent", new { id = @Model.CourseId })</p>
 <p>@Html.ActionLink("Edit Course", "Edit", new { id = @Model.CourseId})</p>
 <p>@Html.ActionLink("Add New Course", "Create")</p>

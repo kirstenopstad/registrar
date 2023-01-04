@@ -1,14 +1,34 @@
-@{
+ @{
   Layout = "_Layout";
 }
-<h1>University Registrar</h1>
-<h2>Student Directory</h2>
 @model Registrar.Models.Student
 @using Registrar.Models
 @using System;
+<h1>University Registrar</h1>
+<h2>Student Directory</h2>
 
 <p>Student Name: @Html.DisplayFor(model => model.Name)</p>
 <p>Student Enrollment Date: @Model.EnrollmentDate.ToString("MM-dd-yyyy")</p>
 
+@if (@Model.JoinCourseStudents.Count == 0)
+{
+  <p>This student has not enrolled in any classes.</p>
+}
+else
+{
+  <h4>Courses Enrolled</h4>
+  <ul>
+    @foreach(CourseStudent courseStudent in Model.JoinCourseStudents)
+    {
+      <li>Course Name: @courseStudent.Course.Name || Course Number: @courseStudent.Course.CourseNumber</li>
+      @using (Html.BeginForm("DeleteCourse", "Students", routeValues: new { id = courseStudent.CourseStudentId}))
+      {
+        <input type="submit" value="Remove Course">
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add Course To Student", "AddCourse", new { id = @Model.StudentId})</p>
 <p>@Html.ActionLink("Edit Student", "Edit", new { id = @Model.StudentId})</p>
 <p>@Html.ActionLink("Add New Student", "Create")</p>
