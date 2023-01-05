@@ -1,4 +1,4 @@
-# University Registrar AODSJNON
+# University Registrar
 
 #### By Kirsten Opstad, Brian Noh & Teddy Atkinson
 
