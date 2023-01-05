@@ -37,21 +37,6 @@ else
     }
   </ul>
 }
-<!-- TODO: Fix forms to pass correct & complete info to controller -- should it be a new view? -->
 
-@using (Html.BeginForm("AddStudent", "Departments", routeValues: new { id = @Model.DepartmentId }))
-{
-  @Html.Hidden(@Model.Name)
-
-  @Html.Label("Student")
-  @Html.DropDownList("StudentId")
-  <input type="submit" value="Add Student To Department">
-}
-@using (Html.BeginForm("AddCourse", "Departments", routeValues: new { id = @Model.DepartmentId }))
-{
-  @Html.Label("Course")
-  @Html.DropDownList("CourseId")
-  <input type="submit" value="Add Course To Department">
-}
 <p>@Html.ActionLink("Edit Department", "Edit", new { id = @Model.DepartmentId})</p>
 <p>@Html.ActionLink("Add New Department", "Create")</p>

@@ -98,6 +98,7 @@ namespace Registrar.Controllers
       }
       return RedirectToAction("Details", new { id = course.CourseId });
     }
+    
     [HttpPost]
     public ActionResult DeleteCourse(int id)
     {
@@ -105,6 +106,28 @@ namespace Registrar.Controllers
       _db.CourseStudents.Remove(thisCourseStudent);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = thisCourseStudent.CourseId });
+    }
+
+    [HttpPost]
+    public ActionResult CourseStatus(int id, string source)
+    {
+      CourseStudent thisCS = _db.CourseStudents.FirstOrDefault(entry => entry.CourseStudentId == id);
+      if (thisCS.Status == false)
+      {
+        thisCS.Status = true;
+      }
+      else 
+      {
+        thisCS.Status = false;
+      }
+      _db.CourseStudents.Update(thisCS);
+      _db.SaveChanges();
+      // if from student details, send via students controller
+      if (source == "Students")
+      {
+        return RedirectToAction("Details", "Students", new { id = thisCS.StudentId });
+      }
+      return RedirectToAction("Details", new { id = thisCS.CourseId });
     }
   }
 }

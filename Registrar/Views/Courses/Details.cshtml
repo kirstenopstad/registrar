@@ -16,16 +16,45 @@
 else
 {
   <h4>Students Enrolled</h4>
-  <ul>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Completed</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
     @foreach (CourseStudent courseStudent in Model.JoinCourseStudents)
     {
-      <li>Student Name: @courseStudent.Student.Name</li>
-      @using (Html.BeginForm("DeleteCourse", "Courses", routeValues: new { id = courseStudent.CourseStudentId }))
-      {
-        <input type="submit" value="Remove Student">
-      }
+
+      <tr>
+        <td>@courseStudent.Student.Name</td>
+        <td>@courseStudent.Status</td>
+        <td>
+            @using (Html.BeginForm("CourseStatus", "Courses", routeValues: new { id = courseStudent.CourseStudentId}))
+            {
+              @if (courseStudent.Status == false)
+              {
+                <input type="submit" value="Complete"/>
+              }
+              else
+              {
+                <input type="submit" value="Incomplete"/>
+              }
+            }
+        </td>
+        <td>
+          @using (Html.BeginForm("DeleteCourse", "Courses", routeValues: new { id = courseStudent.CourseStudentId }))
+          {
+            <input type="submit" value="Remove Student">
+          }
+        </td>
+
+      </tr>
     }
-  </ul>
+  </table>
 }
 
 <p>@Html.ActionLink("Enroll Student", "AddStudent", new { id = @Model.CourseId })</p>

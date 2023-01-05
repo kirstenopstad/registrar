@@ -6,7 +6,7 @@
 
 @model Registrar.Models.Student
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger"})</p>
-<p>@Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class="text-danger"})</p>
+<p>@Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class="text-danger field-validation-error"})</p>
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
