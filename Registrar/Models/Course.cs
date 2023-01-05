@@ -11,6 +11,8 @@ namespace Registrar.Models
     [Required(ErrorMessage = "Course number is required")]
     public string CourseNumber { get; set; }
     public int CourseId { get; set; }
+    public int DepartmentId { get; set; }
+    public Department Department { get; set; }
     public List<CourseStudent> JoinCourseStudents { get; }
   }
 }

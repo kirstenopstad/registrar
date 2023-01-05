@@ -9,10 +9,13 @@ namespace Registrar.Models
     // properties, constructors, methods, etc. go here
     [Required(ErrorMessage = "Name must be entered!")]
     public string Name { get; set; }
+    [Required(ErrorMessage = "You must enter a date.")]
     [Range(typeof(DateTime), "1/1/2023", "12/31/2023",
         ErrorMessage = "Registration is only open for calendar year 2023")]
     public DateTime EnrollmentDate { get; set; }
     public int StudentId { get; set; }
+    public int DepartmentId { get; set; }
+    public Department Department { get; set; }
     public List<CourseStudent> JoinCourseStudents { get; } // collection navigation property
   }
 }
