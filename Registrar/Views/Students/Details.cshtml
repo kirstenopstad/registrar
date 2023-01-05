@@ -8,7 +8,7 @@
 <h2>Student Directory</h2>
 
 <p>Student Name: @Html.DisplayFor(model => model.Name)</p>
-<p>Student Enrollment Date: @Model.EnrollmentDate.ToString("MM-dd-yyyy")</p>
+<p>Student Enrollment Date: @Model.EnrollmentDate?.ToString("MM-dd-yyyy")</p>
 
 @if (@Model.JoinCourseStudents.Count == 0)
 {

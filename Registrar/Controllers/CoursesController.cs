@@ -106,5 +106,7 @@ namespace Registrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = thisCourseStudent.CourseId });
     }
+
+    
   }
 }

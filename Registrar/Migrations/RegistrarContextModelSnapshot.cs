@@ -40,7 +40,7 @@ namespace Registrar.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("Registrar.Models.CourseStudent", b =>
@@ -61,7 +61,7 @@ namespace Registrar.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("CourseStudents");
+                    b.ToTable("CourseStudents", (string)null);
                 });
 
             modelBuilder.Entity("Registrar.Models.Department", b =>
@@ -76,7 +76,7 @@ namespace Registrar.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("Registrar.Models.Student", b =>
@@ -99,7 +99,7 @@ namespace Registrar.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("Registrar.Models.Course", b =>
