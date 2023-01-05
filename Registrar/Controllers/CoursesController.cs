@@ -109,7 +109,7 @@ namespace Registrar.Controllers
     }
 
     [HttpPost]
-    public ActionResult CourseStatus(int id)
+    public ActionResult CourseStatus(int id, string source)
     {
       CourseStudent thisCS = _db.CourseStudents.FirstOrDefault(entry => entry.CourseStudentId == id);
       if (thisCS.Status == false)
@@ -122,17 +122,12 @@ namespace Registrar.Controllers
       }
       _db.CourseStudents.Update(thisCS);
       _db.SaveChanges();
+      // if from student details, send via students controller
+      if (source == "Students")
+      {
+        return RedirectToAction("Details", "Students", new { id = thisCS.StudentId });
+      }
       return RedirectToAction("Details", new { id = thisCS.CourseId });
     }
-
-    // [HttpPost]
-    // public ActionResult IncompleteCourse(int id)
-    // {
-    //   CourseStudent thisCS = _db.CourseStudents.FirstOrDefault(entry => entry.CourseStudentId == id);
-    //   thisCS.Status = false;
-    //   _db.CourseStudents.Update(thisCS);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Details", new { id = thisCS.CourseId });
-    // }
   }
 }

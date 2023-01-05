@@ -31,14 +31,7 @@ else
 
       <tr>
         <td>@courseStudent.Student.Name</td>
-        <td>@courseStudent.Status </td>
-      
-        <td>
-          @using (Html.BeginForm("DeleteCourse", "Courses", routeValues: new { id = courseStudent.CourseStudentId }))
-          {
-            <input type="submit" value="Remove Student">
-          }
-        </td>
+        <td>@courseStudent.Status</td>
         <td>
             @using (Html.BeginForm("CourseStatus", "Courses", routeValues: new { id = courseStudent.CourseStudentId}))
             {
@@ -52,6 +45,13 @@ else
               }
             }
         </td>
+        <td>
+          @using (Html.BeginForm("DeleteCourse", "Courses", routeValues: new { id = courseStudent.CourseStudentId }))
+          {
+            <input type="submit" value="Remove Student">
+          }
+        </td>
+
       </tr>
     }
   </table>
