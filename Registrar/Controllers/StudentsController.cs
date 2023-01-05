@@ -26,6 +26,7 @@ namespace Registrar.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
       return View();
     }
     [HttpPost]
@@ -34,6 +35,7 @@ namespace Registrar.Controllers
       // validate
       if (!ModelState.IsValid)
       {
+        ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
         return View(student);
       }
       else
@@ -56,6 +58,7 @@ namespace Registrar.Controllers
     public ActionResult Edit(int id)
     {
       Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
       return View(thisStudent);
     }
 
@@ -87,15 +90,15 @@ namespace Registrar.Controllers
     {
       // looking for an instance with the argument set in firstOrdefault() to ensure that there is no instance with those ids
       // 
-      #nullable enable
+#nullable enable
       CourseStudent? courseStudentEntity = _db.CourseStudents.FirstOrDefault(courseStudent => (courseStudent.CourseId == courseId && courseStudent.StudentId == student.StudentId));
-      #nullable disable
+#nullable disable
       if (courseStudentEntity == null && courseId != 0)
       {
-        _db.CourseStudents.Add(new CourseStudent() { CourseId = courseId, StudentId = student.StudentId});
+        _db.CourseStudents.Add(new CourseStudent() { CourseId = courseId, StudentId = student.StudentId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details", new { id = student.StudentId});
+      return RedirectToAction("Details", new { id = student.StudentId });
     }
 
     [HttpPost]
