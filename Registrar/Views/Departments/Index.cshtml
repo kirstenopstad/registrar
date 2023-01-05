@@ -15,6 +15,10 @@ else
     @foreach (Department department in Model)
     {
       <li>@Html.ActionLink($"{department.Name}", "Details", new { id = department.DepartmentId })</li>
+      @using (Html.BeginForm("Delete", "Departments", routeValues: new {id = department.DepartmentId}))
+      {
+        <input type="submit" value="Delete">
+      }
     }
   </ul>
 }

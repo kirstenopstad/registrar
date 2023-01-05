@@ -46,37 +46,25 @@ namespace Registrar.Controllers
       return View(thisDepartment);
     }
 
-    // TODO: Fix AddStudent & AddCourse routes -- DbUpdateException: MySqlException: Column 'Name' cannot be null
-    
-    [HttpPost]
-    public ActionResult AddStudent(int studentId, int id)
-    // public ActionResult AddStudent(Student student, int id)
+    public ActionResult Edit(int id)
     {
-      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == studentId);
-      _db.Students.Update(thisStudent);
-      // _db.Students.Update(student);
-
-      Department thisDepartment = _db.Departments
-        .Include(dep => dep.Students)
-        .FirstOrDefault(dep => dep.DepartmentId == id);
-      _db.Departments.Update(thisDepartment);
-
-      _db.SaveChanges();
-      return RedirectToAction("Details", new {id =  thisDepartment.DepartmentId});
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      return View(thisDepartment);
     }
     [HttpPost]
-    // public ActionResult AddCourse(int courseId, int id)
-    public ActionResult AddCourse(Course course, int id)
+    public ActionResult Edit(Department department)
     {
-      // Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == courseId);
-      // _db.Courses.Update(thisCourse);
-      _db.Courses.Update(course);
-
-      Department thisDepartment = _db.Departments.FirstOrDefault(dep => dep.DepartmentId == id);
-      _db.Departments.Update(thisDepartment);
-
+      _db.Departments.Update(department);
       _db.SaveChanges();
-      return RedirectToAction("Details", new {id =  thisDepartment.DepartmentId});
+      return RedirectToAction("Details", new { id = department.DepartmentId});
+    }
+    [HttpPost]
+    public ActionResult Delete(int id)
+    {
+      Department thisDepartment = _db.Departments.FirstOrDefault(department => department.DepartmentId == id);
+      _db.Departments.Remove(thisDepartment);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
