@@ -8,7 +8,7 @@
 <h2>Student Directory</h2>
 
 <p>Student Name: @Html.DisplayFor(model => model.Name)</p>
-<p>Student Enrollment Date: @Model.EnrollmentDate.ToString("MM-dd-yyyy")</p>
+<p>Student Enrollment Date: @Model.EnrollmentDate?.ToString("MM-dd-yyyy")</p>
 
 @if (@Model.JoinCourseStudents.Count == 0)
 {
@@ -17,16 +17,44 @@
 else
 {
   <h4>Courses Enrolled</h4>
-  <ul>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Course Number</th>
+        <th>Course Completed</th>
+      </tr>
+    </thead>
     @foreach(CourseStudent courseStudent in Model.JoinCourseStudents)
     {
-      <li>Course Name: @courseStudent.Course.Name || Course Number: @courseStudent.Course.CourseNumber</li>
-      @using (Html.BeginForm("DeleteCourse", "Students", routeValues: new { id = courseStudent.CourseStudentId}))
-      {
-        <input type="submit" value="Remove Course">
-      }
+      <tr>
+        <td>@courseStudent.Course.Name</td>
+        <td>@courseStudent.Course.CourseNumber</td>
+        <td>@courseStudent.Status</td>
+        <td>
+          @using (Html.BeginForm("CourseStatus", "Courses", routeValues: new { id = courseStudent.CourseStudentId, source = "Students"}))
+          {
+            @if (courseStudent.Status == false)
+            {
+              <input type="submit" value="Complete"/>
+            }
+            else
+            {
+              <input type="submit" value="Incomplete"/>
+            }
+          }
+        </td>
+        <td>
+          @using (Html.BeginForm("DeleteCourse", "Students", routeValues: new { id = courseStudent.CourseStudentId}))
+          {
+            <input type="submit" value="Remove Course">
+          }
+        </td>
+
+      </tr>
     }
-  </ul>
+
+  </table class="table table-striped">
 }
 
 <p>@Html.ActionLink("Add Course To Student", "AddCourse", new { id = @Model.StudentId})</p>

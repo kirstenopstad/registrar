@@ -6,7 +6,7 @@
 
 @model Registrar.Models.Student
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger"})</p>
-<p>@Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class="text-danger"})</p>
+<p>@Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class="text-danger field-validation-error"})</p>
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
@@ -14,6 +14,9 @@
 
   @Html.LabelFor(model => model.EnrollmentDate)
   @Html.TextBoxFor(model => model.EnrollmentDate, new { type="date" })
+
+  @Html.LabelFor(model => model.Department)
+  @Html.DropDownList("DepartmentId")
 
   <input type="submit" value="Register Student" />
 }

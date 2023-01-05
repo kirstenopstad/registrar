@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+@model Registrar.Models.Department
+@using Registrar.Models
+@using System
+
+<h1>University Registrar</h1>
+<h2>Department</h2>
+
+<p>Department Name: @Html.DisplayFor(model => model.Name)</p>
+<h3>Students In Department</h3>
+@if (@Model.Students.Count == 0)
+{
+  <p>There are no students in this department.</p>
+}
+else
+{
+  <ul>
+    @foreach(Student student in Model.Students)
+    {
+      <li>@Html.ActionLink($"{student.Name}", "Details", "Students", new { id = student.StudentId })</li>
+    }
+  </ul>
+}
+<h3>Courses In Department</h3>
+@if (@Model.Courses.Count == 0)
+{
+  <p>There are no courses in this department.</p>
+}
+else
+{
+  <ul>
+    @foreach(Course course in Model.Courses)
+    {
+      <li>@Html.ActionLink($"{course.Name}", "Details", "Courses", new { id = course.CourseId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Department", "Edit", new { id = @Model.DepartmentId})</p>
+<p>@Html.ActionLink("Add New Department", "Create")</p>

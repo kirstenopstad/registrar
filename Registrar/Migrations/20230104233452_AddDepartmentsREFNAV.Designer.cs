@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Registrar.Models;
 
@@ -10,9 +11,10 @@ using Registrar.Models;
 namespace Registrar.Migrations
 {
     [DbContext(typeof(RegistrarContext))]
-    partial class RegistrarContextModelSnapshot : ModelSnapshot
+    [Migration("20230104233452_AddDepartmentsREFNAV")]
+    partial class AddDepartmentsREFNAV
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace Registrar.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -91,8 +90,7 @@ namespace Registrar.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EnrollmentDate")
-                        .IsRequired()
+                    b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Registrar.Models;
 
@@ -10,9 +11,10 @@ using Registrar.Models;
 namespace Registrar.Migrations
 {
     [DbContext(typeof(RegistrarContext))]
-    partial class RegistrarContextModelSnapshot : ModelSnapshot
+    [Migration("20230104232830_AddDepartments")]
+    partial class AddDepartments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,7 @@ namespace Registrar.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -51,9 +53,6 @@ namespace Registrar.Migrations
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -88,11 +87,10 @@ namespace Registrar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EnrollmentDate")
-                        .IsRequired()
+                    b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
@@ -108,13 +106,9 @@ namespace Registrar.Migrations
 
             modelBuilder.Entity("Registrar.Models.Course", b =>
                 {
-                    b.HasOne("Registrar.Models.Department", "Department")
+                    b.HasOne("Registrar.Models.Department", null)
                         .WithMany("Courses")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("Registrar.Models.CourseStudent", b =>
@@ -138,13 +132,9 @@ namespace Registrar.Migrations
 
             modelBuilder.Entity("Registrar.Models.Student", b =>
                 {
-                    b.HasOne("Registrar.Models.Department", "Department")
+                    b.HasOne("Registrar.Models.Department", null)
                         .WithMany("Students")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("Registrar.Models.Course", b =>

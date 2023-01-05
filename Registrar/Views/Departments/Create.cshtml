@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@model Registrar.Models.Department
+<h1>University Registrar</h1>
+<h2>Add Department</h2>
+
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger"})</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  <input type="submit" value="Add Department" />
+}
+<p>@Html.ActionLink("Add Department", "Create")</p>
